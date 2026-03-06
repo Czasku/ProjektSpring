@@ -1,5 +1,6 @@
 package vod.service.impl;
 
+import org.springframework.stereotype.Component;
 import vod.model.Manga;
 import vod.model.Mangaka;
 import vod.repository.MangaStoreDao;
@@ -11,6 +12,7 @@ import vod.service.MangaService;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Component
 public class MangaServiceBean implements MangaService {
 
     private static final Logger log = Logger.getLogger(MangaService.class.getName());
