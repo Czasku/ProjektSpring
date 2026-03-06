@@ -20,16 +20,14 @@ public class VodServiceMain {
                 new AnnotationConfigApplicationContext("vod");
 
         MangaStoreService service = context.getBean(MangaStoreService.class);
-        // używamy kontekstu do pobrania beana typu interfejsowego MangaStoreService
         MangaStoreService service2 = context.getBean(MangaStoreService.class);
 
-        // service use
         List<MangaStore> mangaStores = service.getAllMangaStores();
         System.out.println(mangaStores.size() + " mangaStores found:");
         mangaStores.forEach(System.out::println);
 
 
-        String foo = context.getBean(String.class);
-        System.out.println("\nfoo string: " + foo);
+        System.out.println("\n");
+        MangaService mangaService = context.getBean(MangaService.class);
     }
 }

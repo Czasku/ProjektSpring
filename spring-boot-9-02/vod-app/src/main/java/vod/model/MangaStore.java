@@ -1,5 +1,7 @@
 package vod.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ public class MangaStore {
     private int id;
     private String name;
     private String logo; //url logo w przypadku UI będzie zaciągany dynamicznie
+    @JsonIgnore
     private List<Manga> mangaList = new ArrayList<>();
 //relacja wiele do wiele
     public MangaStore(int id, String name, String logo) {//konsturktor
