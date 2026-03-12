@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,12 @@ public class MangaStoreRest {
     private final MangaService mangaService;
     private final MessageSource messageSource;
     private final LocaleResolver localeResolver;
+    private final MangaStoreValidator validator;
+
+//    @InitBinder
+//    void initBinder(WebDataBinder binder){
+//        binder.addValidators(validator);
+//    }
 
     @GetMapping("/mangastores")
     List<MangaStore> getMangaStores(
