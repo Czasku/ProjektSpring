@@ -1,9 +1,15 @@
 package vod.web.rest;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import vod.model.Manga;
 import vod.model.MangaStore;
@@ -11,6 +17,7 @@ import vod.service.MangaService;
 import vod.service.MangaStoreService;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +27,8 @@ public class MangaStoreRest {
 
     private final MangaStoreService mangaStoreService;
     private final MangaService mangaService;
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
 
     @GetMapping("/mangastores")
     List<MangaStore> getMangaStores(
@@ -65,8 +74,18 @@ public class MangaStoreRest {
     }
 
     @PostMapping("/mangastore")
-    ResponseEntity<MangaStore> addMangaStore(@RequestBody MangaStore mangaStore) {
+    ResponseEntity<?> addMangaStore(@Validated @RequestBody MangaStore mangaStore, Errors errors, HttpServletRequest request) {
         log.info("about to add manga store {}", mangaStore);
+
+        if(errors.hasErrors()){
+            Locale locale = localeResolver.resolveLocale(request);
+            String errorMsg = errors.getAllErrors().stream()
+                    .map(e->messageSource.getMessage(e.getCode(), new Object[0], locale))
+                    .reduce("errors:\n", (accu, e)->accu+e+"\n");
+            return ResponseEntity.badRequest().body(errorMsg);
+
+        }
+
         mangaStore = mangaStoreService.addMangaStore(mangaStore);
         log.info("manga store added {}", mangaStore);
         return ResponseEntity.status(HttpStatus.CREATED).body(mangaStore);

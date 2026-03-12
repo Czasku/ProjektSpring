@@ -17,8 +17,9 @@ Accept: application/json
 ### crate new manga store
 POST http://localhost:8080/webapi/mangastore
 Content-Type: application/json
+Accept-Language: en
 
 {
-  "name": "Yatta",
+  "name": "",
   "logo": "jakisurl"
 }
