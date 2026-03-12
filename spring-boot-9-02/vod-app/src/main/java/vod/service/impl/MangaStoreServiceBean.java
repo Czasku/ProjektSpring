@@ -1,6 +1,7 @@
 package vod.service.impl;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import vod.model.Manga;
 import vod.model.MangaStore;
 import vod.repository.MangaStoreDao;
@@ -10,7 +11,7 @@ import vod.service.MangaStoreService;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Component
+@Service
 public class MangaStoreServiceBean implements MangaStoreService {
 
     private static final Logger log = Logger.getLogger(MangaStoreService.class.getName());
@@ -48,4 +49,9 @@ public class MangaStoreServiceBean implements MangaStoreService {
         return mangaStoreDao.findByManga(m);
     }
 
+    @Override
+    public MangaStore addMangaStore(MangaStore m) {
+        log.info("about to add cinema " + m);
+        return mangaStoreDao.save(m);
+    }
 }

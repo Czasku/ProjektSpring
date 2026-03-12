@@ -1,5 +1,6 @@
 package vod.repository;
 
+import org.springframework.beans.CachedIntrospectionResults;
 import vod.model.MangaStore;
 import vod.model.Manga;
 
@@ -13,4 +14,5 @@ public interface MangaStoreDao {
 
     List<MangaStore> findByManga(Manga m);
 
+    MangaStore save(MangaStore m);
 }

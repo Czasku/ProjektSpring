@@ -1,6 +1,7 @@
 package vod.repository.mem;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import vod.model.Manga;
 import vod.model.MangaStore;
 import vod.repository.MangaDao;
@@ -9,7 +10,7 @@ import vod.model.Mangaka;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Repository
 public class MemMangaDao implements MangaDao {
     @Override
     public List<Manga> findAll() {
@@ -23,7 +24,7 @@ public class MemMangaDao implements MangaDao {
 
     @Override
     public List<Manga> findByMangaka(Mangaka mangaka) {
-       return SampleData.mangaList.stream().filter(m -> m.getMangaka() == mangaka).collect(Collectors.toList());
+        return SampleData.mangaList.stream().filter(m -> m.getMangaka() == mangaka).collect(Collectors.toList());
     }
 
     @Override

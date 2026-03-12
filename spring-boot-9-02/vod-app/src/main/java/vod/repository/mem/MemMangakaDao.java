@@ -1,12 +1,13 @@
 package vod.repository.mem;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import vod.repository.MangakaDao;
 import vod.model.Mangaka;
 
 import java.util.List;
 
-@Component
+@Repository
 public class MemMangakaDao implements MangakaDao {
     @Override
     public List<Mangaka> findAll() {

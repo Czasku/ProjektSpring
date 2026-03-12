@@ -15,4 +15,5 @@ public interface MangaStoreService {
 
     List<Manga> getMangaListInMangaStore(MangaStore store);
 
+    MangaStore addMangaStore(MangaStore m);
 }

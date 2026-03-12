@@ -24,4 +24,7 @@ public class DummyMangaStoreDao implements MangaStoreDao {
     public List<MangaStore> findByManga(Manga m)  {
         return List.of();
     }
+
+    @Override
+    public MangaStore save(MangaStore m) {return null; }
 }

@@ -1,0 +1,24 @@
+### get all mangastores
+GET http://localhost:8080/webapi/mangastores
+
+### get all mangastores with params
+GET http://localhost:8080/webapi/mangastores?phrase=abc
+custom-header: custom-value
+Cookie: some-cookie-some-value
+
+### get manga stores by id
+GET http://localhost:8080/webapi/mangastores/3
+Accept: application/xml
+
+### get manga stores having manga
+GET http://localhost:8080/webapi/manga/1/mangastores
+Accept: application/json
+
+### crate new manga store
+POST http://localhost:8080/webapi/mangastore
+Content-Type: application/json
+
+{
+  "name": "Yatta",
+  "logo": "jakisurl"
+}
