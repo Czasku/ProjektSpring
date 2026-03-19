@@ -47,6 +47,10 @@ public class MangaStoreRest {
         log.info("phrase: {}", phrase);
         log.info("custom-header: {}", customHeader);
         log.info("some-cookie: {}", someCookie);
+
+        if(phrase != null && phrase.equals("foo")){
+            throw new IllegalArgumentException("Foo!");
+        }
         List<MangaStore> mangaStores = mangaStoreService.getAllMangaStores();
         log.info("{} manga stores found", mangaStores.size());
         return mangaStores;

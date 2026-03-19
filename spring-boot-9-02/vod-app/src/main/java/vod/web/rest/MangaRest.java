@@ -3,6 +3,8 @@ package vod.web.rest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;;
@@ -70,8 +72,11 @@ public class MangaRest {
     }
 
     @PostMapping("/mangas")
-    ResponseEntity<?> addManga(@RequestBody MangaDTO mangaDTO){
+    ResponseEntity<?> addManga(@Validated @RequestBody MangaDTO mangaDTO, Errors errors){
         log.info("about to add manga {}", mangaDTO);
+        if(errors.hasErrors()){
+            return ResponseEntity.badRequest().build();
+        }
         Manga manga = new Manga();
         manga.setTitle(mangaDTO.getTitle());
         manga.setPoster(mangaDTO.getPoster());

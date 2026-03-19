@@ -2,7 +2,7 @@
 GET http://localhost:8080/webapi/mangastores
 
 ### get all mangastores with params
-GET http://localhost:8080/webapi/mangastores?phrase=abc
+GET http://localhost:8080/webapi/mangastores?phrase=foo
 custom-header: custom-value
 Cookie: some-cookie-some-value
 
@@ -20,7 +20,7 @@ Content-Type: application/json
 Accept-Language: en
 
 {
-  "name": "Yd",
+  "name": "Ys",
   "logo": "jakisurl"
 }
 
