@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import vod.model.Manga;
 import vod.model.MangaStore;
+import vod.service.MangaService;
 import vod.service.MangaStoreService;
 
 import java.util.List;
@@ -18,13 +19,24 @@ import java.util.List;
 public class MangaStoreController {
 
     private final MangaStoreService mangaStoreService;
+    private final MangaService mangaService;
 
     @GetMapping("/mangastores")
-    String getMangaStore(Model model){
+    String getMangaStore(
+            Model model,
+            @RequestParam(value = "mangaId", required = false) Integer mangaId) {
         log.info("about to display manga stores list");
-        List<MangaStore> mangaStores = mangaStoreService.getAllMangaStores();
-        model.addAttribute("mangaStores", mangaStores);
-        return "mangaStoresView";
+        if (mangaId != null) {
+            Manga manga = mangaService.getMangaById(mangaId);
+            List<MangaStore> mangaStores = mangaStoreService.getMangaStoresByManga(manga);
+            model.addAttribute("mangaStores", mangaStores);
+            model.addAttribute("title", "Manga Stores with '" + manga.getTitle() + "'");
+        } else {
+            List<MangaStore> mangaStores = mangaStoreService.getAllMangaStores();
+            model.addAttribute("mangaStores", mangaStores);
+            model.addAttribute("manga", null);
+        }
 
+        return "mangaStoresView";
     }
 }
