@@ -42,6 +42,6 @@ Content-Type: application/json
   "title": "Manga",
   "poster": "jakisurl2",
   "rating": 5.4,
-  "mangaka": 1
+  "mangaka": 13
 
 }

@@ -1,15 +1,20 @@
 package vod.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Mangaka {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
+
+    @OneToMany(mappedBy = "mangaka")
     @JsonIgnore
     private List<Manga> mangaList = new ArrayList<>();
     public Mangaka(int id, String firstName, String lastName) {

@@ -1,15 +1,29 @@
 package vod.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Manga {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private String poster;
+
+    @ManyToOne
+    @JoinColumn(name = "mangaka_id")
     private Mangaka mangaka;
     private float rating;
+
+    @ManyToMany
+    @JoinTable(
+            name = "manga_manga_store",
+            joinColumns = @JoinColumn(name = "manga_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "manga_store_id", referencedColumnName = "id")
+    )
     private List<MangaStore> mangaStores = new ArrayList<>(); //relacja wiele do wiele - bidirectional
 
     public Manga(int id, String title, String poster, Mangaka mangaka, float rating) {
