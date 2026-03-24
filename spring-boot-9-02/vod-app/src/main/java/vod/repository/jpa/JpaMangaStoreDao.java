@@ -11,7 +11,6 @@ import vod.repository.MangaStoreDao;
 import java.util.List;
 
 @Repository
-@Primary
 public class JpaMangaStoreDao implements MangaStoreDao {
 
     @PersistenceContext

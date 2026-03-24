@@ -21,7 +21,7 @@ public class MangaStore {
     @Column(name = "logo")
     private String logo; //url logo w przypadku UI będzie zaciągany dynamicznie
 
-    @ManyToMany(mappedBy = "manga_stores")
+    @ManyToMany(mappedBy = "mangaStores")
     @JsonIgnore
     private List<Manga> mangaList = new ArrayList<>();
 //relacja wiele do wiele
