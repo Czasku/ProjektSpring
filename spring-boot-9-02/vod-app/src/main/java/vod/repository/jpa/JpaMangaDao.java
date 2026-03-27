@@ -12,7 +12,6 @@ import vod.repository.MangaDao;
 import java.util.List;
 
 @Repository
-@Primary
 public class JpaMangaDao implements MangaDao {
 
     @PersistenceContext

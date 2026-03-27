@@ -1,7 +1,14 @@
 package vod.service.impl;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import vod.model.Manga;
 import vod.model.Mangaka;
 import vod.repository.MangaStoreDao;
@@ -14,19 +21,15 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
+@RequiredArgsConstructor
 public class MangaServiceBean implements MangaService {
 
     private static final Logger log = Logger.getLogger(MangaService.class.getName());
 
-    private MangakaDao mangakaDao;
-    private MangaStoreDao mangaStoreDao;
-    private MangaDao mangaDao;
-
-    public MangaServiceBean(MangakaDao mangakaDao, MangaStoreDao mangaStoreDao, MangaDao mangaDao) {
-        this.mangakaDao = mangakaDao;
-        this.mangaStoreDao = mangaStoreDao;
-        this.mangaDao = mangaDao;
-    }
+    private final MangakaDao mangakaDao;
+    private final MangaStoreDao mangaStoreDao;
+    private final MangaDao mangaDao;
+    private final PlatformTransactionManager transactionManager;
 
     public List<Manga> getAllMangaList() {
         log.info("searching all movies...");
@@ -73,10 +76,29 @@ public class MangaServiceBean implements MangaService {
         return mangakaDao.findById(id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Manga addManga(Manga m) {
         log.info("about to add movie " + m);
-        return mangaDao.add(m);
+
+//        TransactionStatus ts = transactionManager.getTransaction(new DefaultTransactionDefinition());
+//        try {
+//            m = mangaDao.add(m);
+//            if (m.getTitle().equals("test")) {
+//                throw new RuntimeException("test exception");
+//            }
+//            transactionManager.commit(ts);
+//        } catch (RuntimeException e){
+//            transactionManager.rollback(ts);
+//            throw e;
+//        }
+
+        m = mangaDao.add(m);
+        if(m.getTitle().equals("test")) {
+            throw new RuntimeException("test exception");
+        }
+
+        return m;
     }
 
     @Override

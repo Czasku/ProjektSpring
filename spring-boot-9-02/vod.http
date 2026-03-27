@@ -39,9 +39,9 @@ POST http://localhost:8080/webapi/mangas
 Content-Type: application/json
 
 {
-  "title": "Manga",
+  "title": "test2",
   "poster": "jakisurl2",
   "rating": 5.4,
-  "mangaka": 13
+  "mangaka": 1
 
 }
