@@ -1,5 +1,6 @@
 package vod.service.impl;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import vod.model.Manga;
@@ -49,6 +50,7 @@ public class MangaStoreServiceBean implements MangaStoreService {
         return mangaStoreDao.findByManga(m);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public MangaStore addMangaStore(MangaStore m) {
         log.info("about to add cinema " + m);

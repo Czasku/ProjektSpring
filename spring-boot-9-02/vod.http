@@ -18,9 +18,10 @@ Accept: application/json
 POST http://localhost:8080/webapi/mangastore
 Content-Type: application/json
 Accept-Language: en
+Authorization: Basic dbuser2 dbuser1
 
 {
-  "name": "Ys",
+  "name": "Ys2",
   "logo": "jakisurl"
 }
 
